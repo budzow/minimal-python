@@ -19,6 +19,11 @@ strategy:
     Python37:
       python.version: '3.7'
 
+variables:
+- name: AGENT_USE_NODE10
+  value: true
+
+
 steps:
 - task: SonarQubePrepare@4
   inputs:
