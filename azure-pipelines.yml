@@ -5,6 +5,7 @@
 
 trigger:
 - main
+- feature
 
 pool:
   vmImage: ubuntu-latest
@@ -27,7 +28,7 @@ variables:
 steps:
 - task: SonarQubePrepare@4
   inputs:
-    SonarQube: 'SQ8'
+    SonarQube: 'sq20254'
     scannerMode: 'CLI'
     configMode: 'manual'
     cliProjectKey: 'minimal-python'
