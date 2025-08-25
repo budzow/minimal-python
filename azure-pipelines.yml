@@ -1,38 +1,30 @@
-# Python package
-# Create and test a Python package on multiple Python versions.
-# Add steps that analyze code, save the dist with the build record, publish to a PyPI-compatible index, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/python
-
 trigger:
-- main
-- feature
-
-pool:
-  vmImage: ubuntu-latest
-strategy:
-  matrix:
-    Python27:
-      python.version: '2.7'
-    Python35:
-      python.version: '3.5'
-    Python36:
-      python.version: '3.6'
-    Python37:
-      python.version: '3.7'
-
-variables:
-- name: AGENT_USE_NODE10
-  value: true
-
+- master # or the name of your main branch
+- feature/*
 
 steps:
-- task: SonarQubePrepare@4
+ # Checkout the repository
+ - checkout: self
+ 
+ # Disable shallow fetch
+   fetchDepth: 0
+
+# Prepare Analysis Configuration task
+- task: SonarQubePrepare@7
   inputs:
     SonarQube: 'sq20254'
-    scannerMode: 'CLI'
+    scannerMode: 'cli'
     configMode: 'manual'
     cliProjectKey: 'minimal-python'
-    cliProjectName: 'minimal-python'
-    cliSources: '.'
 
-- task: SonarQubeAnalyze@4
+# Add your build task(s) here
+
+# Run Code Analysis task
+- task: SonarQubeAnalyze@7
+  inputs:
+    jdkversion: 'JAVA_HOME_17_X64'
+
+# Publish Quality Gate Result task
+- task: SonarQubePublish@7
+  inputs:
+    pollingTimeoutSec: '300'
