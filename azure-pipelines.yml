@@ -2,12 +2,13 @@ trigger:
 - master # or the name of your main branch
 - feature/*
 
+pool:
+  vmImage: 'ubuntu-latest'
+
 steps:
- # Checkout the repository
- - checkout: self
- 
- # Disable shallow fetch
-   fetchDepth: 0
+# Checkout the repository
+- checkout: self
+  fetchDepth: 0
 
 # Prepare Analysis Configuration task
 - task: SonarQubePrepare@7
