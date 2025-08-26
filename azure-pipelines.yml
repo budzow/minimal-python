@@ -1,6 +1,6 @@
 trigger:
 - master # or the name of your main branch
-- feature*
+- feature
 
 pool:
   vmImage: 'ubuntu-latest'
