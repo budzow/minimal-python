@@ -1,3 +1,4 @@
 delete from tab;
 delete from bat;
 delete from atb;
+delete from bta;
